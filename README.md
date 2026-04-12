@@ -45,9 +45,9 @@ task-board/
 1. Clone the repository:
 ```bash
 git clone https://github.com/your-username/todo-app-project.git
----
+---bash
 
-2. Open the project folder
+## 2. Open the project folder
 
 3.Run the project:
 Open index.html in your browser
