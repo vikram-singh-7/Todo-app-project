@@ -1,3 +1,4 @@
+// Handles task creation, deletion, filtering, and progress tracking
 // ── Category config ──────────────────────────────────────────
 const CATEGORIES = {
   work:     { color: '#a29bfe', label: 'Work' },
