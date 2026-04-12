@@ -31,7 +31,9 @@ This app helps users organize tasks efficiently with features like categories, f
 task-board/
 │
 ├── index.html # Main structure
+
 ├── style.css # Styling
+
 └── script.js # Functionality
 
 ---
