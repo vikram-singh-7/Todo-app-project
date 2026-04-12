@@ -1,0 +1,354 @@
+/* ── Reset & Base ── */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #07071a;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px 16px;
+}
+
+/* ── Slide-in animation for tasks ── */
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Wrapper centers the card ── */
+.wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+/* ── Main App Card ── */
+.app {
+  width: 100%;
+  max-width: 480px;
+  background: #0f0f1a;
+  border: 1px solid #1e1e35;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+/* ────────────────────────
+   HEADER
+──────────────────────── */
+.app-header {
+  background: #13132b;
+  padding: 22px 24px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid #1e1e35;
+}
+
+.app-title {
+  font-size: 22px;
+  font-weight: 500;
+  color: #ffffff;
+  margin-bottom: 4px;
+}
+
+.app-date {
+  font-size: 12px;
+  color: #44445a;
+}
+
+.score-pill {
+  background: #1a1a30;
+  border: 1px solid #2a2a45;
+  border-radius: 14px;
+  padding: 8px 16px;
+  text-align: center;
+  min-width: 64px;
+}
+
+.score-num {
+  display: block;
+  font-size: 20px;
+  font-weight: 500;
+  color: #a29bfe;
+  line-height: 1.2;
+}
+
+.score-lbl {
+  font-size: 10px;
+  color: #44445a;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ────────────────────────
+   ADD TASK BOX
+──────────────────────── */
+.add-box {
+  background: #111125;
+  padding: 16px 24px;
+  border-bottom: 1px solid #1e1e35;
+}
+
+.add-box input {
+  width: 100%;
+  background: #1a1a2e;
+  border: 1px solid #2a2a45;
+  border-radius: 10px;
+  padding: 11px 14px;
+  font-size: 14px;
+  color: #ffffff;
+  outline: none;
+  margin-bottom: 12px;
+  transition: border-color 0.2s;
+}
+
+.add-box input::placeholder {
+  color: #33334a;
+}
+
+.add-box input:focus {
+  border-color: #a29bfe;
+}
+
+.add-row {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+/* Category Buttons */
+.cat-btn {
+  flex: 1;
+  padding: 8px 0;
+  font-size: 12px;
+  border-radius: 8px;
+  border: 1px solid #2a2a45;
+  background: transparent;
+  color: #44445a;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.cat-btn:hover {
+  color: #888;
+  border-color: #444;
+}
+
+/* Selected state per category — color set via JS */
+.cat-btn.sel {
+  font-weight: 500;
+}
+
+#cat-work.sel     { border-color: #a29bfe; color: #a29bfe; background: #1e1a3a; }
+#cat-study.sel    { border-color: #00cec9; color: #00cec9; background: #0a2828; }
+#cat-personal.sel { border-color: #fd79a8; color: #fd79a8; background: #2a1020; }
+#cat-other.sel    { border-color: #fdcb6e; color: #fdcb6e; background: #2a2010; }
+
+/* Add Button */
+.submit-btn {
+  padding: 8px 18px;
+  background: #a29bfe;
+  color: #0f0f1a;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+
+.submit-btn:hover {
+  background: #7c75e0;
+}
+
+/* ────────────────────────
+   FILTERS
+──────────────────────── */
+.filters {
+  display: flex;
+  gap: 8px;
+  padding: 12px 24px;
+  background: #0f0f1a;
+  border-bottom: 1px solid #1e1e35;
+}
+
+.f-btn {
+  font-size: 12px;
+  padding: 5px 16px;
+  border-radius: 20px;
+  border: 1px solid #1e1e35;
+  background: transparent;
+  color: #44445a;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.f-btn:hover {
+  border-color: #444;
+  color: #888;
+}
+
+.f-btn.active {
+  background: #a29bfe;
+  color: #0f0f1a;
+  border-color: #a29bfe;
+  font-weight: 500;
+}
+
+/* ────────────────────────
+   TASK LIST
+──────────────────────── */
+.task-list {
+  padding: 16px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 80px;
+  background: #0f0f1a;
+}
+
+/* Empty state */
+.empty-msg {
+  text-align: center;
+  color: #2a2a45;
+  font-size: 13px;
+  padding: 24px 0;
+}
+
+/* Individual Task */
+.task-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: #1a1a2e;
+  border-radius: 10px;
+  border-left: 3px solid var(--task-color, #a29bfe);
+  animation: slideIn 0.2s ease;
+  transition: opacity 0.2s;
+}
+
+.task-item.done {
+  opacity: 0.45;
+}
+
+/* Checkbox */
+.task-check {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  border-radius: 6px;
+  border: 1.5px solid var(--task-color, #a29bfe);
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #0f0f1a;
+  font-weight: 500;
+  transition: all 0.15s;
+}
+
+.task-check.checked {
+  background: var(--task-color, #a29bfe);
+}
+
+/* Task body */
+.task-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.task-text {
+  display: block;
+  font-size: 14px;
+  color: #ccccdd;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: all 0.2s;
+}
+
+.task-item.done .task-text {
+  text-decoration: line-through;
+  color: #33334a;
+}
+
+.task-tag {
+  display: inline-block;
+  font-size: 10px;
+  color: var(--task-color, #a29bfe);
+  margin-top: 3px;
+  opacity: 0.8;
+}
+
+/* Delete Button */
+.task-del {
+  background: none;
+  border: none;
+  color: #2a2a45;
+  cursor: pointer;
+  font-size: 15px;
+  line-height: 1;
+  padding: 0 2px;
+  transition: color 0.15s;
+  flex-shrink: 0;
+}
+
+.task-del:hover {
+  color: #ff7675;
+}
+
+/* ────────────────────────
+   PROGRESS BAR
+──────────────────────── */
+.progress-bar {
+  height: 4px;
+  background: #1a1a2e;
+  margin: 0 24px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #a29bfe, #fd79a8);
+  border-radius: 4px;
+  width: 0%;
+  transition: width 0.4s ease;
+}
+
+/* ────────────────────────
+   FOOTER
+──────────────────────── */
+.app-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px 18px;
+  background: #0f0f1a;
+}
+
+.stat-text {
+  font-size: 12px;
+  color: #33334a;
+}
+
+.clear-btn {
+  font-size: 12px;
+  background: none;
+  border: none;
+  color: #33334a;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+
+.clear-btn:hover {
+  color: #ff7675;
+}
