@@ -44,7 +44,7 @@ task-board/
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/your-username/todo-app-project.git
+git clone https://github.com/vikram-singh-7/todo-app-project.git
 ```
 2. Open the project folder
 
